@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Study Log</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#F9FAFB] min-h-screen py-6 md:py-10 px-4">
+
+    <div id="capture-area" class="max-w-xl mx-auto bg-white rounded-[2.5rem] shadow-xl shadow-slate-200/50 overflow-hidden p-8 md:p-10 relative">
+        
+        <div class="flex justify-between items-start mb-10">
+            <div class="flex-1">
+                <input type="text" id="userName" placeholder="ชื่อ..." class="text-3xl font-bold text-slate-800 outline-none w-full bg-transparent border-none placeholder:text-slate-200">
+                <div class="mt-4">
+                    <p class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest mb-1.5 ml-1">ดูประวัติ / เลือกวันที่</p>
+                    <input type="date" id="datePicker" class="text-sm font-semibold text-slate-500 outline-none bg-slate-50 px-4 py-2.5 rounded-2xl border border-slate-100 focus:border-indigo-200 transition-all cursor-pointer">
+                </div>
+            </div>
+            <div class="text-right">
+                <p class="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Total Study</p>
+                <h2 id="grandTotal" class="text-3xl font-black text-indigo-500">0 นาที</h2>
+                <div id="saveBadge" class="text-[9px] font-bold text-emerald-400 opacity-0 transition-opacity uppercase mt-1">● Saved</div>
+            </div>
+        </div>
+
+        <div id="input-section" class="flex gap-2 mb-10 bg-slate-50 p-2 rounded-[1.5rem] border border-slate-100">
+            <input type="text" id="subjectInput" placeholder="เพิ่มวิชาใหม่..." class="flex-1 bg-transparent border-none px-4 py-3 outline-none text-slate-600 font-medium">
+            <button onclick="addSubject()" class="bg-indigo-500 text-white px-6 py-3 rounded-2xl font-bold hover:bg-indigo-600 active:scale-95 transition-all shadow-md">เพิ่ม</button>
+        </div>
+
+        <div id="subjectList" class="space-y-12"></div>
+
+        <div id="action-buttons" class="mt-16 space-y-3">
+            <button onclick="openStats()" class="w-full py-4.5 bg-indigo-50 text-indigo-600 rounded-3xl font-bold hover:bg-indigo-100 transition-all flex items-center justify-center gap-2">
+                📊 สรุปผลประเมินวันนี้
+            </button>
+            <button onclick="takeScreenshot()" class="w-full py-4.5 bg-slate-900 text-white rounded-3xl font-bold hover:bg-black shadow-xl transition-all">
+                📸 บันทึกเป็นรูปภาพ
+            </button>
+        </div>
+
+        <div id="capture-footer" class="hidden mt-12 pt-8 border-t border-slate-50 text-center">
+            <p class="text-slate-200 text-[9px] tracking-[0.3em] uppercase italic">My Study Journey Tracker</p>
+        </div>
+    </div>
+
+    <div id="statsModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md hidden flex items-center justify-center z-50 p-6">
+        <div class="bg-white w-full max-w-sm rounded-[2.5rem] p-10 shadow-2xl scale-in">
+            <h2 class="text-2xl font-bold text-center text-slate-800 mb-8 tracking-tight">Report Summary</h2>
+            <div class="space-y-6">
+                <div class="text-center">
+                    <p class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-1.5">เวลาสะสม</p>
+                    <h3 id="modalTotalTime" class="text-4xl font-black text-indigo-500">0 ชม.</h3>
+                </div>
+                <div id="evaluationBox" class="py-6 rounded-[2rem] text-center border-2 transition-all">
+                    <p id="evaluationText" class="text-lg font-bold"></p>
+                </div>
+            </div>
+            <button onclick="closeStats()" class="w-full mt-10 py-4 bg-slate-50 text-slate-400 rounded-2xl font-bold text-xs tracking-widest hover:bg-slate-100">CLOSE</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
